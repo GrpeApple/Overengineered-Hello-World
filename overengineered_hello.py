@@ -1,4 +1,6 @@
-def createClass(createClass_boolean):
+import asyncio
+
+async def createClass(createClass_boolean):
     if createClass_boolean == True:
         global Hello_World_Class
         class Hello_World_Class:
@@ -11,9 +13,9 @@ def createClass(createClass_boolean):
                     if print_tuple_boolean:
                         for i in self.tuple_string:
                             self.output.append(i)
-def initialize(initialize_boolean, return_boolean):
+async def initialize(initialize_boolean, return_boolean):
     if initialize_boolean:
-        createClass(True)
+        await createClass(True)
         def H_function(H_boolean):
             if H_boolean == True:
                 global H
@@ -105,7 +107,7 @@ def print_string(empty_boolean, for_boolean, link_to_initialize_boolean, end_to_
         global stop
     if for_boolean == True:
         if link_to_initialize_boolean == True:
-            for output in initialize(True, True):
+            for output in asyncio.run(initialize(True, True)):
                 if end_to_empty_variable_boolean == True:
                     if print_string_boolean:
                         print(output, end=empty)
