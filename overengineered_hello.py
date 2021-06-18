@@ -1,11 +1,13 @@
-def hex_to_string(hex_to_string_boolean):
+import asyncio
+
+async def hex_to_string(hex_to_string_boolean):
 	if hex_to_string_boolean:
 		hex_values = ["48", "65", "6c", "6c", "6f", "2c", "20", "57", "6f", "72", "6c", "64", "21"]
 		global string_text
 		string_text = []
 		for i in hex_values:
 			string_text.append(bytearray.fromhex(i).decode())
-def createClass(createClass_boolean):
+async def createClass(createClass_boolean):
 	if createClass_boolean == True:
 		global Hello_World_Class
 		class Hello_World_Class:
@@ -18,9 +20,11 @@ def createClass(createClass_boolean):
 					if print_tuple_boolean:
 						for i in self.tuple_string:
 							self.output.append(i)
-def initialize(initialize_boolean, return_boolean):
+async def initialize(initialize_boolean, return_boolean, hex_boolean):
+	if hex_boolean == True:
+		await hex_to_string(True)
 	if initialize_boolean:
-		createClass(True)
+		await createClass(True)
 		def H_function(H_boolean):
 			if H_boolean == True:
 				global H
@@ -106,17 +110,14 @@ def initialize(initialize_boolean, return_boolean):
 		if return_boolean == True:
 			return hello_world.output
 def print_string(empty_boolean, for_boolean, link_to_initialize_boolean, end_to_empty_variable_boolean, print_string_boolean, hex_boolean):
-	if hex_boolean == True:
-		hex_to_string(True)
 	if empty_boolean == True:
 		global empty
 		empty=''
 		global stop
 	if for_boolean == True:
 		if link_to_initialize_boolean == True:
-			for output in initialize(True, True):
+			for output in asyncio.run(initialize(True, True, hex_boolean)):
 				if end_to_empty_variable_boolean == True:
 					if print_string_boolean:
 						print(output, end=empty)
 print_string(True, True, True, True, True, True)
-
